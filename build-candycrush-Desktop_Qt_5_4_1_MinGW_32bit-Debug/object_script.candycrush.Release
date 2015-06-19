@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\candy.o
+./release\candy_1.o
+./release\candy_2.o
+./release\candy_3.o
+./release\candy_4.o
+./release\gencandy.o
+./release\moc_mainwindow.o
+./release\moc_candy.o
+);

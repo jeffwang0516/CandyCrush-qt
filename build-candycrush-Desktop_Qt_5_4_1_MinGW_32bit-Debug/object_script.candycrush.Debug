@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\candy.o
+./debug\candy_1.o
+./debug\candy_2.o
+./debug\candy_3.o
+./debug\candy_4.o
+./debug\gencandy.o
+./debug\moc_mainwindow.o
+./debug\moc_candy.o
+);
