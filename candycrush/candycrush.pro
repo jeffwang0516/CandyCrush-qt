@@ -19,7 +19,11 @@ SOURCES += main.cpp\
     candy_2.cpp \
     candy_3.cpp \
     candy_4.cpp \
-    gencandy.cpp
+    gencandy.cpp \
+    point.cpp \
+    steps.cpp \
+    stars.cpp \
+    windowend.cpp
 
 HEADERS  += mainwindow.h \
     candy.h \
@@ -27,6 +31,14 @@ HEADERS  += mainwindow.h \
     candy_2.h \
     candy_3.h \
     candy_4.h \
-    gencandy.h
+    gencandy.h \
+    point.h \
+    steps.h \
+    stars.h \
+    windowend.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    windowend.ui
+
+RESOURCES += \
+    pic.qrc

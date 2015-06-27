@@ -7,6 +7,12 @@ INPUT(
 ./debug\candy_3.o
 ./debug\candy_4.o
 ./debug\gencandy.o
+./debug\point.o
+./debug\steps.o
+./debug\stars.o
+./debug\windowend.o
+./debug\qrc_pic.o
 ./debug\moc_mainwindow.o
 ./debug\moc_candy.o
+./debug\moc_windowend.o
 );

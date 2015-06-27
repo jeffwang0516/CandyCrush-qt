@@ -7,6 +7,12 @@ INPUT(
 ./release\candy_3.o
 ./release\candy_4.o
 ./release\gencandy.o
+./release\point.o
+./release\steps.o
+./release\stars.o
+./release\windowend.o
+./release\qrc_pic.o
 ./release\moc_mainwindow.o
 ./release\moc_candy.o
+./release\moc_windowend.o
 );
