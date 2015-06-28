@@ -36,14 +36,17 @@ MainWindow::MainWindow(QWidget *parent) :
     score->setText("SCORE:\n"+QString::number(points->get()));
     score->setStyleSheet("font: 20pt\"MV Boli\";color: rgb(255, 8, 32)");
     controlsLayout->addWidget(score,8,0);
+    //show steps left
     stepsR = new QLabel;
     stepsR->setText("STEP:\n"+QString::number(steps->get()));
     stepsR->setStyleSheet("font: 20pt\"MV Boli\";color: blue");
     controlsLayout->addWidget(stepsR,8,1);
+    //Show num of stars
     star = new QLabel;
     star->setText(QString::number(starcnt->get())+"\nSTARS");
     star->setStyleSheet("font: 20pt\"MV Boli\";color: dark ");
     controlsLayout->addWidget(star,8,2);
+    //Quit during game Btn
     QPushButton *quitBtn = new QPushButton("QUIT!");
     quitBtn->setFixedSize(60,60);
     controlsLayout->addWidget(quitBtn, 8, 7);
@@ -118,6 +121,7 @@ void MainWindow::init()
     cnt=1;
 
 }
+//refresh the positions change
 void MainWindow::refresh()
 {
     for(int i=0;i<dimension;i++){
@@ -131,15 +135,16 @@ void MainWindow::refresh()
     starcnt->starsnumcheck(points->get());
     star->setText(QString::number(starcnt->get())+"\nSTARS");
 }
+//MAIN Elimination process func
 bool MainWindow::elimTest(int i, int j)
-{   bool moved=true;
+{
+    bool moved=true;
     clearcheck = new HorizontalChk;
     for(int u=0;u<dimension;u++){
         for(int v=0;v<dimension;v++){
             static_cast<HorizontalChk*>(clearcheck)->setArray(u,v,board[u][v]);
         }
     }
-
 
     //Horizontal
     int newjL=0, newjR=0, rec=1,aa, special[dimension][dimension]={0};
@@ -252,16 +257,12 @@ bool MainWindow::elimTest(int i, int j)
                 break;
              }
 
-    }else{
-        int spe=0;
-      // qDebug()<<"fuck"<<rec<<" "<<rec2;
+    }else
+    {
+    int spe=0;
     switch(rec){
-    //case 2:
-     //    qDebug()<<"notenou2";
-      //   break;
 
     case 3:
-        qDebug()<<"inn3";
         int jj;
 
         for(jj=newjL;jj<=newjR;++jj){
@@ -272,7 +273,7 @@ bool MainWindow::elimTest(int i, int j)
         for(jj=newjL;jj<=newjR;++jj){
 
             if(special[i][jj]!=0){
-                qDebug()<<"fuckuin case 3"<<special[i][jj]<<" "<<"a"<<i<<" "<<jj;
+
                 switch(special[i][jj]){
                 case 5:case 6:case 7:case 8:
                     for(int a=0;a<dimension;a++)
@@ -523,6 +524,7 @@ bool MainWindow::elimTest(int i, int j)
     return moved;
 
 }
+//Check if out of bounds
 bool MainWindow::bound(int i,int j)
 {
     if(i>=0&&j>=0&&i<8&&j<8)
@@ -530,6 +532,7 @@ bool MainWindow::bound(int i,int j)
     else
         return false;
 }
+
 void MainWindow::fillBlank()
 {
     for(int i=0;i<dimension;i++){
@@ -635,6 +638,7 @@ void MainWindow::exchange(int a)
            board[row1][col1]=board[row2][col2];
            board[row2][col2]=temp2;
        }
+       //run until no possible eliminations
         do
         {
 
@@ -674,6 +678,7 @@ void MainWindow::exchange(int a)
 
 
 }
+//ENDGAME FUNCTION
 void MainWindow::handleEndGame()
 {
 
