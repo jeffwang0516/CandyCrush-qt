@@ -34,16 +34,17 @@ public:
     bool elimTest(int i, int j);
     bool bound(int i, int j);
     void fillBlank();
-
+    void blankdrop();
 signals:
     void quit(int star, int score);
+    void clicked(const int &text);
 public slots:
 
 private slots:
      void handleEndGame();
      void exchange(int);
-signals:
-     void clicked(const int &text);
+
+
 private:
     static const int dimension = 8;
     Ui::MainWindow *ui;
@@ -62,8 +63,6 @@ private:
     QLabel *stepsR;
     QLabel *star;
     windowEnd *end;
-
-
 
 };
 

@@ -110,9 +110,9 @@ MainWindow::~MainWindow()
 void MainWindow::init()
 {
     int boardinit[dimension][dimension]={{1, 3, 4, 1, 4, 2, 1, 4},
-                                         {3, 1, 2, 3, 1, 4, 3, 1},
+                                         {3, 2, 1, 3, 1, 1, 3, 1},
                                          {4, 1, 2, 1, 3, 2, 2, 3},
-                                         {2, 3, 1, 2, 4, 1, 4, 1},
+                                         {2, 3, 3, 1, 4, 1, 4, 1},
                                          {1, 2, 4, 3, 1, 2, 3, 2},
                                          {2, 1, 3, 1, 4, 1, 4, 1},
                                          {4, 2, 4, 2, 3, 2, 1, 3},
@@ -215,29 +215,34 @@ bool MainWindow::elimTest(int i, int j)
     delete clearcheck2;
 
 
+    int temp=0;
     if(rec+rec2>=6&&((rec==3&&rec2==3)||(rec==4&&rec2==3)||(rec==3&&rec2==4)))//
     {
 
             //for bomb
             switch(rec+rec2){
-            case 6:
-                for(int jj=newjL;jj<newjR;++jj){
-                   board[i][jj]=0;
-                   for(int s=i;s>=0;s--){
-                      if(s==0){board[s][jj]=0; break;}
-                      board[s][jj]=board[s-1][jj];
-                   }
+            case 6:case 7:
+                for(int jj=newjL;jj<=newjR;++jj){
+                    if(jj!=j)//
+                      board[i][jj]=0;
+                  // for(int s=i;s>=0;s--){
+                     // if(s==0){board[s][jj]=0; break;}
+                     // board[s][jj]=board[s-1][jj];
+                  // }
                 }
-                for(int ii=newiL;ii<newiR;++ii){
-                   board[ii][j]=0;
-                   for(int jj=ii;jj>=0;jj--){
-                        if(jj==0){board[jj][j]=0; break;}
-                        board[jj][j]=board[jj-1][j];
-                   }
+                for(int ii=newiL;ii<=newiR;++ii){
+                  if(ii!=i)
+                      board[ii][j]=0;
+                   //for(int jj=ii;jj>=0;jj--){
+                 //       if(jj==0){board[jj][j]=0; break;}
+                  //      board[jj][j]=board[jj-1][j];
+                  // }
                 }
-                board[newiR][j]+=12;
+                board[i][j]+=12;
+                qDebug()<<board[i][j]<<rec<<" "<<rec2<<"\n"<<i<<" "<<j;
+                blankdrop();//qDebug()<<board[i][j]<<rec<<" "<<rec2<<"\n"<<i<<" "<<j;
                 break;
-            case 7:
+            /*case 7:
                 for(int ii=newiL;ii<newiR;++ii){
                    board[ii][j]=0;
                    for(int jj=ii;jj>=0;jj--){
@@ -254,7 +259,7 @@ bool MainWindow::elimTest(int i, int j)
                    }
                 }
 
-                break;
+                break;*/
 
 
              default:
@@ -283,38 +288,40 @@ bool MainWindow::elimTest(int i, int j)
                 case 5:case 6:case 7:case 8:
                     for(int a=0;a<dimension;a++)
                         board[i][a]=0;
-                    for(int h=0;h<dimension;h++){
+                    blankdrop();
+                    /*for(int h=0;h<dimension;h++){
                         for(int g=i;g>=0;g--){
                             if(g==0){board[g][h]=0;continue;}
                             board[g][h]=board[g-1][h];
-
                         }
-                    }
+                    }*/
                     break;
                 case 9:case 10:case 11:case 12:
                     for(int a=0;a<dimension;a++)
                         board[a][jj]=0;
                     for(int h=newjL;h<=newjR;++h){
 
-                    board[i][h]=0;
+                    board[i][h]=0;/*
                     for(int s=i;s>=0;s--){
                         if(s==0){board[s][h]=0; break;}
                         board[s][h]=board[s-1][h];
+                    }*/
                     }
-                    }
+                    blankdrop();
                     break;
                 case 13:case 14:case 15:case 16:
                     for(int a=i-1;a<=i+1;a++)
                         for(int b=jj-1;b<=jj+1;b++)
                             if(bound(a,b))
                                board[a][b]=0;
-                    for(int b=jj-1;b<=jj+1;b++){
+                    /*for(int b=jj-1;b<=jj+1;b++){
                         for(int a=i-1;a>=0;a--){
                             if(a==0)board[0][b]=0;
                             else
                                 board[a][b]=board[a-1][b];
                         }
-                    }
+                    }*/
+                    blankdrop();
 
 
                      break;
@@ -333,11 +340,12 @@ bool MainWindow::elimTest(int i, int j)
             for(jj=newjL;jj<=newjR;++jj){
 
             board[i][jj]=0;
+            /*
             for(int s=i;s>=0;s--){
                 if(s==0)board[s][jj]=0;
                 else
                 board[s][jj]=board[s-1][jj];
-            }
+            }*/blankdrop();
             }
 
         }
@@ -348,7 +356,6 @@ bool MainWindow::elimTest(int i, int j)
 
         for(int jj=newjL;jj<=newjR;++jj){
              if(special[i][jj]!=0)spe=1;
-
         }
         if(spe>0){
         for(int jj=newjL;jj<=newjR;++jj){
@@ -361,7 +368,7 @@ bool MainWindow::elimTest(int i, int j)
                            board[i][a]=0;
 
                     }
-                    //
+                    /*
                     for(int h=0;h<dimension;h++){
                         if(h!=j)board[i][h]=0;
                         else continue;
@@ -371,19 +378,23 @@ bool MainWindow::elimTest(int i, int j)
 
 
                         }
-                    }
+                    }*/
+                    blankdrop();
                     break;
                 case 9:case 10:case 11:case 12:
                     for(int a=0;a<dimension;a++)
-                        board[a][jj]=0;
+                        if(a!=i)
+                           board[a][jj]=0;
                     for(jj=newjL;jj<=newjR;++jj){
-
-                    board[i][jj]=0;
+                        if(jj!=j)
+                            board[i][jj]=0;
+                        /*
                     for(int s=i;s>=0;s--){
                         if(s==0){board[s][jj]=0; break;}
                         board[s][jj]=board[s-1][jj];
+                    }*/
                     }
-                    }
+                    blankdrop();
                     break;
                 default:
                     moved=false;
@@ -396,13 +407,14 @@ bool MainWindow::elimTest(int i, int j)
 
         for(int jj=newjL;jj<=newjR;++jj){
             if(jj!=j)board[i][jj]=0;
-            else continue;
+            /*else continue;
             //jj==j?re=i-1:re=i;
             for(int s=i;s>=0;s--){
                 if(s==0){board[s][jj]=0; break;}
                 board[s][jj]=board[s-1][jj];
-            }
+            }*/
         }
+        blankdrop();
         }
         break;
 
@@ -411,6 +423,7 @@ bool MainWindow::elimTest(int i, int j)
         for(int ii=newjL;ii<=newjR;++ii)
             board[i][ii]=0;
         board[i][j]=17;
+        /*
         for(int jj=newjL;jj<=newjR;++jj){
             if(jj!=j)board[i][jj]=0;
             else continue;
@@ -418,7 +431,8 @@ bool MainWindow::elimTest(int i, int j)
                 if(s==0){board[s][jj]=0;}else{
                 board[s][jj]=board[s-1][jj];}
             }
-        }
+        }*/
+        blankdrop();
        // board[i][j]+=8;
         break;
 
@@ -447,20 +461,23 @@ bool MainWindow::elimTest(int i, int j)
                     case 5:case 6:case 7:case 8:
                         for(int a=0;a<dimension;a++)
                             board[ii][a]=0;
+                        /*
                         for(int h=0;h<dimension;h++){
                             for(int g=i;g>=0;g--){
                                 if(g==0){board[g][h]=0;continue;}
                                 board[g][h]=board[g-1][h];
 
                             }
-                        }
+                        }*/
                         for(int iii=newiL;iii<=newiR;++iii){
                             board[iii][j]=0;
-                            for(int jj=iii;jj>=0;jj--){
+                            /*for(int jj=iii;jj>=0;jj--){
                                   if(jj==0){board[jj][j]=0; break;}
                                   board[jj][j]=board[jj-1][j];
-                            }
+                            }*/
                         }
+                        blankdrop();
+                        break;
                     case 9:case 10:case 11:case 12:
                         for(int a=0;a<dimension;a++)
                             board[a][j]=0;
@@ -470,13 +487,18 @@ bool MainWindow::elimTest(int i, int j)
                             for(int b=j-1;b<=j+1;b++)
                                 if(bound(a,b))
                                    board[a][b]=0;
+                        for(int iii=newiL;iii<=newiR;++iii){
+                            board[iii][j]=0;
+                        }
+                        blankdrop();
+                        /*
                         for(int b=j-1;b<=j+1;b++){
                             for(int a=ii-1;a>=0;a--){
                                 if(a==0)board[0][b]=0;
                                 else
                                     board[a][b]=board[a-1][b];
                             }
-                        }
+                        }*/
 
 
                          break;
@@ -492,32 +514,37 @@ bool MainWindow::elimTest(int i, int j)
         {
         for(int ii=newiL;ii<=newiR;++ii){
             board[ii][j]=0;
-            for(int jj=ii;jj>=0;jj--){
+            /*for(int jj=ii;jj>=0;jj--){
                   if(jj==0)board[jj][j]=0;
                   else
                   board[jj][j]=board[jj-1][j];
-            }
+            }*/
         }
+        blankdrop();
         }
         break;
     case 4:
 
-        for(int ii=newiL;ii<newiR;++ii){
-            board[ii][j]=0;
+        for(int ii=newiL;ii<=newiR;++ii){
+            if(ii!=i)
+                board[ii][j]=0;
+            /*
             for(int jj=ii;jj>=0;jj--){
                   if(jj==0){board[jj][j]=0; break;}
                   board[jj][j]=board[jj-1][j];
-            }
+            }*/
         }
 
-        board[newiR][j]+=4;
+        board[i][j]+=4;
+        blankdrop();
         break;
 
    case 5:
 
-        for(int ii=newiL;ii<newiR;++ii)
+        for(int ii=newiL;ii<=newiR;++ii)
             board[ii][j]=0;
-        board[newiR][j]=17;
+        board[i][j]=17;
+        blankdrop();
         break;
     default:
 
@@ -589,17 +616,7 @@ void MainWindow::exchange(int a)
                     }
                 board[row2][col2]=0;
             }
-            for(int j=0;j<dimension;j++){
-                for(int i=0;i<dimension;i++){
-                    if(board[i][j]==0){
-                        for(int ii=i;ii>=0;ii--){
-                            if(ii==0)board[ii][j]=0;
-                            else
-                            board[ii][j]=board[ii-1][j];
-                        }
-                    }
-                }
-            }
+            blankdrop();
             fillBlank();
         }
         for(int i=0;i<dimension;i++)
@@ -629,7 +646,7 @@ void MainWindow::exchange(int a)
                 if(last[i][j]!=board[i][j]&&!((i==row1&&j==col1)||(i==row2&&j==col2))){//
                     //qDebug()<<"notMOVE CHECK!";
                     ifMove=true;
-                    points->changePoint(10);
+                    points->changePoint(15);
                 }
             }
         }
@@ -683,6 +700,28 @@ void MainWindow::exchange(int a)
 
 
 }
+void MainWindow::blankdrop()
+{
+    int temp;
+    for(int j=0;j<dimension;j++){
+        for(int i=dimension-2;i>=0;i--){
+            if(board[i][j]!=0){
+                for(int ii=dimension-1;ii>i;ii--){
+                    if(board[ii][j]==0){
+                        temp=board[ii][j];
+                        board[ii][j]=board[i][j];
+                        board[i][j]=temp;
+                    }
+
+
+
+
+                }
+            }
+        }
+    }
+}
+
 //ENDGAME FUNCTION
 void MainWindow::handleEndGame()
 {
