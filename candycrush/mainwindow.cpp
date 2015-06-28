@@ -109,14 +109,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
-    int boardinit[dimension][dimension]={{1, 3, 4, 1, 4, 2, 1, 4},
-                                         {3, 2, 1, 3, 1, 1, 3, 1},
+    int boardinit[dimension][dimension]={{1, 3, 4, 3, 4, 2, 1, 4},
+                                         {3, 1, 3, 1, 1, 3, 1, 1},
                                          {4, 1, 2, 1, 3, 2, 2, 3},
-                                         {2, 3, 3, 1, 4, 1, 4, 1},
+                                         {2, 3, 1, 2, 4, 1, 4, 1},
                                          {1, 2, 4, 3, 1, 2, 3, 2},
                                          {2, 1, 3, 1, 4, 1, 4, 1},
                                          {4, 2, 4, 2, 3, 2, 1, 3},
-                                         {1, 3, 3, 2, 1, 2, 1, 2}};
+                                         {1, 3, 3, 2, 1, 3, 1, 2}};
     for(int i=0;i<dimension;++i){
         for(int j=0;j<dimension;j++){
             board[i][j]=0;
@@ -215,7 +215,7 @@ bool MainWindow::elimTest(int i, int j)
     delete clearcheck2;
 
 
-    int temp=0;
+
     if(rec+rec2>=6&&((rec==3&&rec2==3)||(rec==4&&rec2==3)||(rec==3&&rec2==4)))//
     {
 
@@ -322,8 +322,6 @@ bool MainWindow::elimTest(int i, int j)
                         }
                     }*/
                     blankdrop();
-
-
                      break;
 
 
@@ -333,7 +331,6 @@ bool MainWindow::elimTest(int i, int j)
                 }
 
             }
-
         }
         }else{
 
@@ -546,6 +543,12 @@ bool MainWindow::elimTest(int i, int j)
         board[i][j]=17;
         blankdrop();
         break;
+    case 6:case 7:case 8:
+        for(int ii=newiL;ii<=newiR;++ii)
+            board[ii][j]=0;
+        blankdrop();
+        break;
+
     default:
 
         moved= false;
@@ -617,6 +620,31 @@ void MainWindow::exchange(int a)
                 board[row2][col2]=0;
             }
             blankdrop();
+            do
+            {
+
+            for(int i=0;i<dimension;i++){
+                for(int j=0;j<dimension;j++){
+                    last[i][j]=board[i][j];
+                }
+            }
+            check=true;
+            for(int i=dimension-1;i>=0;i--){
+                for(int j=0;j<dimension;j++){
+
+                    elimTest(i,j);
+                    fillBlank();
+                }
+            }
+
+            for(int i=0;i<dimension;i++){
+                for(int j=0;j<dimension;j++){
+                    if(last[i][j]!=board[i][j]){
+                        //qDebug()<<"check CHECK!";
+                        check=false;}
+                }
+            }
+            }while(check==false);
             fillBlank();
         }
         for(int i=0;i<dimension;i++)
