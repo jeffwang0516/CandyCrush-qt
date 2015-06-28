@@ -6,6 +6,8 @@ windowEnd::windowEnd(int stars, int points, QWidget *parent) :
     ui(new Ui::windowEnd),star(stars),point(points)
 {
     ui->setupUi(this);
+    if(point>=4000)
+        ui->label->setText("ACHIEVED");
     ui->label_2->setText("SCORE:"+QString::number(point));
     ui->label_3->setText(QString::number(star)+" STARS");
     QPushButton *btn = new QPushButton(this);

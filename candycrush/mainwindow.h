@@ -30,8 +30,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void init();
-
-
     void refresh();
     bool elimTest(int i, int j);
     bool bound(int i, int j);
@@ -42,7 +40,7 @@ signals:
 public slots:
 
 private slots:
-void handleEndGame();
+     void handleEndGame();
      void exchange(int);
 signals:
      void clicked(const int &text);
@@ -65,7 +63,7 @@ private:
     QLabel *star;
     windowEnd *end;
 
-    clearblock *clearcheck;
+
 
 };
 

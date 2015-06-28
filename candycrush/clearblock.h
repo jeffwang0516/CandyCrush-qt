@@ -6,7 +6,7 @@ class clearblock
 {
 public:
     clearblock();
-    ~clearblock();
+    virtual ~clearblock();
     virtual void countnear(int,int)=0;
 
     bool bound(int i, int j);

@@ -52,6 +52,11 @@ MainWindow::MainWindow(QWidget *parent) :
     controlsLayout->addWidget(quitBtn, 8, 7);
     connect(quitBtn, SIGNAL(clicked()),this, SLOT(handleEndGame()));
 
+    QLabel *goal = new QLabel;
+    goal->setText("GOAL:\n4000\npoints");
+    goal->setStyleSheet("font: 20pt\"MV Boli\";color: green");
+    controlsLayout->addWidget(goal,8,4);
+
     controlsLayout->setHorizontalSpacing(0);
     controlsLayout->setVerticalSpacing(0);
     centralWidget->setLayout(controlsLayout);
@@ -139,7 +144,7 @@ void MainWindow::refresh()
 bool MainWindow::elimTest(int i, int j)
 {
     bool moved=true;
-    clearcheck = new HorizontalChk;
+    clearblock *clearcheck = new HorizontalChk;
     for(int u=0;u<dimension;u++){
         for(int v=0;v<dimension;v++){
             static_cast<HorizontalChk*>(clearcheck)->setArray(u,v,board[u][v]);
@@ -147,7 +152,7 @@ bool MainWindow::elimTest(int i, int j)
     }
 
     //Horizontal
-    int newjL=0, newjR=0, rec=1,aa, special[dimension][dimension]={0};
+    int newjL=0, newjR=0, rec=1, special[dimension][dimension]={0};
     newjL=j-1;
     while((board[i][newjL]==board[i][j]||board[i][newjL]==board[i][j]+4||board[i][newjL]==board[i][j]-4||board[i][newjL]==board[i][j]+8||board[i][newjL]==board[i][j]-8||board[i][newjL]==board[i][j]+12||board[i][newjL]==board[i][j]-12)&&bound(i,newjL)){
         if(board[i][newjL]!=board[i][j])
@@ -178,10 +183,10 @@ bool MainWindow::elimTest(int i, int j)
     delete clearcheck;
 
     //Vertical
-    clearcheck = new VerticalChk;
+    clearblock *clearcheck2 = new VerticalChk;
     for(int u=0;u<dimension;u++){
         for(int v=0;v<dimension;v++){
-            static_cast<VerticalChk*>(clearcheck)->setArray(u,v,board[u][v]);
+            static_cast<VerticalChk*>(clearcheck2)->setArray(u,v,board[u][v]);
         }
     }
 
@@ -205,9 +210,9 @@ bool MainWindow::elimTest(int i, int j)
     newiR--;
 
 
-    clearcheck->countnear(i,j);
-    rec2=static_cast<VerticalChk*>(clearcheck)->getrec();
-    delete clearcheck;
+    clearcheck2->countnear(i,j);
+    rec2=static_cast<VerticalChk*>(clearcheck2)->getrec();
+    delete clearcheck2;
 
 
     if(rec+rec2>=6&&((rec==3&&rec2==3)||(rec==4&&rec2==3)||(rec==3&&rec2==4)))//
@@ -683,6 +688,7 @@ void MainWindow::handleEndGame()
 {
 
     end = new windowEnd(starcnt->get(), points->get());
+
     connect(end,SIGNAL(endSig()),this,SLOT(close()));
     setCentralWidget(end);
     end->show();

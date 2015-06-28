@@ -29,7 +29,7 @@
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>80</y>
+     <y>110</y>
      <width>501</width>
      <height>101</height>
     </rect>
@@ -45,14 +45,14 @@ color: rgb(255, 0, 4);</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>160</x>
      <y>300</y>
-     <width>431</width>
+     <width>541</width>
      <height>101</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 50pt &quot;Poor Richard&quot;;
+    <string notr="true">font: 50pt &quot;Ravie&quot;;
 color: rgb(33, 140, 255);</string>
    </property>
    <property name="text">
@@ -62,7 +62,7 @@ color: rgb(33, 140, 255);</string>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>220</x>
      <y>480</y>
      <width>441</width>
      <height>111</height>
