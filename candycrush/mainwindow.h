@@ -15,6 +15,9 @@
 #include "steps.h"
 #include "stars.h"
 #include "windowend.h"
+#include "clearblock.h"
+#include "horizontalchk.h"
+#include "verticalchk.h"
 namespace Ui {
 class MainWindow;
 }
@@ -33,13 +36,13 @@ public:
     bool elimTest(int i, int j);
     bool bound(int i, int j);
     void fillBlank();
-    void handleEndGame();
+
 signals:
     void quit(int star, int score);
 public slots:
 
 private slots:
-
+void handleEndGame();
      void exchange(int);
 signals:
      void clicked(const int &text);
@@ -62,6 +65,7 @@ private:
     QLabel *star;
     windowEnd *end;
 
+    clearblock *clearcheck;
 
 };
 

@@ -23,7 +23,10 @@ SOURCES += main.cpp\
     point.cpp \
     steps.cpp \
     stars.cpp \
-    windowend.cpp
+    windowend.cpp \
+    clearblock.cpp \
+    horizontalchk.cpp \
+    verticalchk.cpp
 
 HEADERS  += mainwindow.h \
     candy.h \
@@ -35,7 +38,10 @@ HEADERS  += mainwindow.h \
     point.h \
     steps.h \
     stars.h \
-    windowend.h
+    windowend.h \
+    clearblock.h \
+    horizontalchk.h \
+    verticalchk.h
 
 FORMS    += mainwindow.ui \
     windowend.ui

@@ -11,6 +11,9 @@ INPUT(
 ./release\steps.o
 ./release\stars.o
 ./release\windowend.o
+./release\clearblock.o
+./release\horizontalchk.o
+./release\verticalchk.o
 ./release\qrc_pic.o
 ./release\moc_mainwindow.o
 ./release\moc_candy.o

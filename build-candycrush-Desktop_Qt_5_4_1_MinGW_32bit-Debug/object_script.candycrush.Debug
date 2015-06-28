@@ -11,6 +11,9 @@ INPUT(
 ./debug\steps.o
 ./debug\stars.o
 ./debug\windowend.o
+./debug\clearblock.o
+./debug\horizontalchk.o
+./debug\verticalchk.o
 ./debug\qrc_pic.o
 ./debug\moc_mainwindow.o
 ./debug\moc_candy.o
